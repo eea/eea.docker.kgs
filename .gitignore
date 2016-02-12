@@ -1,0 +1,3 @@
+*.pyc
+.secret
+examples/develop/src/*
