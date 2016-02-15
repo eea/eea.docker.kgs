@@ -1,0 +1,17 @@
+haproxy:
+  image: remove
+
+plone:
+  image: remove
+
+async:
+  image: remove
+
+zeoserver:
+  image: remove
+
+memcached:
+  image: remove
+
+postfix:
+  image: remove

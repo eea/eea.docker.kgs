@@ -1,0 +1,16 @@
+source_code:
+  image: eeacms/kgs:devel
+  entrypoint: ['buildout']
+  command: ['-c', 'source.cfg']
+  volumes:
+  - ./src/source.cfg:/plone/instance/source.cfg:ro
+  - ./src:/plone/instance/src:z
+
+plone:
+  image: eeacms/kgs:devel
+  ports:
+  - "8080:8080"
+  - "4444:4444"
+  volumes:
+  - ./src:/plone/instance/src:z
+  command: ['fg']

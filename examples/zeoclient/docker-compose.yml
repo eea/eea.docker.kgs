@@ -1,0 +1,52 @@
+haproxy:
+  image: eeacms/haproxy
+  ports:
+  - 80:5000
+  - 1936:1936
+  links:
+  - plone
+  environment:
+  - BACKENDS_PORT=8080
+  - SERVICE_NAMES=plone
+  volumes:
+  - /etc/localtime:/etc/localtime:ro
+
+plone:
+  image: eeacms/kgs
+  links:
+  - zeoserver
+  - memcached
+  - postfix
+  environment:
+  - ZOPE_MODE=zeo_client
+
+async:
+  image: eeacms/kgs
+  links:
+  - zeoserver
+  - memcached
+  - postfix
+  environment:
+  - ZOPE_MODE=zeo_async
+
+zeoserver:
+  image: plone/zeoserver
+  volumes_from:
+  - data
+
+memcached:
+  image: eeacms/memcached
+  environment:
+  - MEMCACHED_MEMORY=2048
+
+postfix:
+  image: eeacms/postfix
+  environment:
+  - MTP_HOST=eea.europa.eu
+
+data:
+  image: busybox
+  volumes:
+  - /data/filestorage
+  - /data/blobstorage
+  command: chown -R 500:500 /data
