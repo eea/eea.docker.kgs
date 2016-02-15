@@ -1,4 +1,4 @@
-FROM eeacms/www
+FROM eeacms/kgs
 MAINTAINER "Alin Voinea" <alin.voinea@eaudeweb.ro>
 
 USER root
