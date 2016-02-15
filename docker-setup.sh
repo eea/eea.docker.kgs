@@ -11,6 +11,7 @@ buildDeps="
   libmemcached-dev
   libpq-dev
   libreadline-dev
+  libldap2-dev
   libsasl2-dev
   libssl-dev
   libxml2-dev
@@ -34,7 +35,6 @@ runDeps="
   wv
   graphviz
   ImageMagick
-  python-ldap
 "
 
 
