@@ -36,7 +36,7 @@ The used Plone version can be found within Dockerfile used to create this image.
 
     $ docker run -p 8080:8080 eeacms/kgs
 
-See more at [eeacms/plone](https://github.com/eea/eea.docker.plone)
+See more at [plone](https://hub.docker.com/r/plone/plone/)
 
 Also you can also run this image as:
 
