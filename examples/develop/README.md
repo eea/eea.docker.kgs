@@ -16,7 +16,7 @@ Update source code:
 
 Start:
 
-    $ docker-compuse up -d
+    $ docker-compuse up -d plone
 
 ## Debug
 

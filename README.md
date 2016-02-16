@@ -50,7 +50,7 @@ For this you have the possibility to override:
 
 * `buildout.cfg`
 
-Below is an example of `base.cfg` and `Dockerfile` to build a custom version
+Below is an example of `buildout.cfg` and `Dockerfile` to build a custom version
 of Plone with your custom versions of packages based on this image:
 
 **buildout.cfg**:
@@ -76,7 +76,7 @@ of Plone with your custom versions of packages based on this image:
 
     FROM eeacms/kgs:6.0
 
-    COPY buildout.cfg /plone/instance/base.cfg
+    COPY buildout.cfg /plone/instance/
     RUN buildout
 
 and then run
