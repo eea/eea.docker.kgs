@@ -36,7 +36,7 @@ The used Plone version can be found within Dockerfile used to create this image.
 
     $ docker run -p 8080:8080 eeacms/kgs
 
-See more at [eeacms/plone](https://github.com/eea/eea.docker.plone)
+See more at [plone](https://hub.docker.com/r/plone/plone/)
 
 Also you can also run this image as:
 
@@ -50,7 +50,7 @@ For this you have the possibility to override:
 
 * `buildout.cfg`
 
-Below is an example of `base.cfg` and `Dockerfile` to build a custom version
+Below is an example of `buildout.cfg` and `Dockerfile` to build a custom version
 of Plone with your custom versions of packages based on this image:
 
 **buildout.cfg**:
@@ -76,7 +76,7 @@ of Plone with your custom versions of packages based on this image:
 
     FROM eeacms/kgs:6.0
 
-    COPY buildout.cfg /plone/instance/base.cfg
+    COPY buildout.cfg /plone/instance/
     RUN buildout
 
 and then run
