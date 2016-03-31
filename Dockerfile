@@ -10,4 +10,4 @@ USER root
 RUN /docker-setup.sh
 USER plone
 
-VOLUME /data/downloads/pdf /data/downloads/tmp
+VOLUME /data/downloads
