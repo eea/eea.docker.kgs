@@ -135,5 +135,26 @@ echo "========================================================================="
 echo "Fixing permissions..."
 echo "========================================================================="
 
-mkdir -p /data/downloads/pdf /data/downloads/tmp
+mkdir -p /data/downloads/pdf
+mkdir -p /data/downloads/tmp
+mkdir -p /plone/instance/var/log/
+
+touch /plone/instance/var/log/instance.log
+touch /plone/instance/var/log/instance-Z2.log
+
+touch /plone/instance/var/log/standalone.log
+touch /plone/instance/var/log/standalone-Z2.log
+
+touch /plone/instance/var/log/zeo_client.log
+touch /plone/instance/var/log/zeo_client-Z2.log
+
+touch /plone/instance/var/log/zeo_async.log
+touch /plone/instance/var/log/zeo_async-Z2.log
+
+touch /plone/instance/var/log/rel_async.log
+touch /plone/instance/var/log/rel_async-Z2.log
+
+touch /plone/instance/var/log/rel_client.log
+touch /plone/instance/var/log/rel_client-Z2.log
+
 chown -vR plone:plone /plone /data
