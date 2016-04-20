@@ -3,7 +3,7 @@ MAINTAINER "Alin Voinea" <alin.voinea@eaudeweb.ro>
 
 ENV ZC_BUILDOUT=2.2.1 \
     SETUPTOOLS=7.0 \
-    KGS_VERSION=6.3
+    KGS_VERSION=6.4
 
 COPY docker-initialize.py docker-setup.sh /
 COPY src/* /tmp/
