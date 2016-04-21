@@ -30,9 +30,11 @@ async:
   - ZOPE_MODE=zeo_async
 
 zeoserver:
-  image: plone/zeoserver
+  image: eeacms/kgs
   volumes_from:
   - data
+  environment:
+  - ZOPE_MODE=zeoserver
 
 memcached:
   image: eeacms/memcached
