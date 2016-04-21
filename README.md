@@ -44,31 +44,31 @@ See more at [plone](https://hub.docker.com/r/plone/plone/)
 
 Start `ZEO` server:
 
-  $ docker run -d --name=zeo \
-               -e ZOPE_MODE=zeoserver \
-           eeacms/kgs
+    $ docker run -d --name=zeo \
+                 -e ZOPE_MODE=zeoserver \
+             eeacms/kgs
 
 Start 2 Plone clients:
 
-  $ docker run -d --name=zclient1 \
-               -e ZOPE_MODE=zeo_client \
-               --link=zeo:zeoserver \
-           eeacms/kgs
+    $ docker run -d --name=zclient1 \
+                 -e ZOPE_MODE=zeo_client \
+                 --link=zeo:zeoserver \
+             eeacms/kgs
 
-  $ docker run -d --name=zclient2 \
-               -e ZOPE_MODE=zeo_client \
-               --link=zeo:zeoserver \
-           eeacms/kgs
+    $ docker run -d --name=zclient2 \
+                 -e ZOPE_MODE=zeo_client \
+                 --link=zeo:zeoserver \
+             eeacms/kgs
 
 Start load balancer:
 
-  $ docker run -d --name=lb \
-               -p 8080:5000 \
-               -p 1936:1936 \
-               --link=zclient1 \
-               --link=zclient2 \
-               -e BACKENDS_PORT=8080 \
-           eeacms/haproxy
+    $ docker run -d --name=lb \
+                 -p 8080:5000 \
+                 -p 1936:1936 \
+                 --link=zclient1 \
+                 --link=zclient2 \
+                 -e BACKENDS_PORT=8080 \
+             eeacms/haproxy
 
 Check load-balancer back-ends health at http://localhost:1936/ (default credentials `admin:admin`).
 If everything looks OK go to http://localhost:8080/ and add your Plone site.
