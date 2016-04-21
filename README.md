@@ -6,7 +6,7 @@ Docker image for Plone with EEA Common Add-ons available based on
 This image is generic, thus you can obviously re-use it within
 your non-related EEA projects.
 
-### Supported tags and respective Dockerfile links
+## Supported tags and respective Dockerfile links
 
   - [Tags](https://hub.docker.com/r/eeacms/kgs/tags/)
 
@@ -14,20 +14,20 @@ These tags have nothing to do with Plone version. They refer to the
 [EEA KGS versions](https://github.com/eea/eea.plonebuildout.core/tree/master/buildout-configs/kgs).
 The used Plone version can be found within Dockerfile used to create this image.
 
-### Base docker image
+## Base docker image
 
  - [hub.docker.com](https://hub.docker.com/r/eeacms/kgs/)
 
-### Source code
+## Source code
 
   - [github.com](http://github.com/eea/eea.docker.kgs)
 
-### Installation
+## Installation
 
 1. Install [Docker](https://www.docker.com/)
 2. Install [Docker Compose](https://docs.docker.com/compose/) (optional)
 
-### Versions
+## Versions
 
 * Plone 4.3.7
 * Zope  2.13.23
@@ -40,7 +40,7 @@ Now, ask for http://localhost:8080/ in your workstation web browser and add a Pl
 
 See more at [plone](https://hub.docker.com/r/plone/plone/)
 
-## ZEO cluster
+## Advanced usage (ZEO, RelStorage, etc.)
 
 Start `ZEO` server:
 
@@ -80,14 +80,15 @@ Also you can run this image as:
 * [RelStorage/PostgreSQL client](https://github.com/eea/eea.docker.kgs/tree/master/examples/relstorage/README.md)
 * [Development mode](https://github.com/eea/eea.docker.kgs/tree/master/examples/develop/README.md)
 
-### Extend the image with custom buildout configuration files
+## Extending this image
 
-For this you have the possibility to override:
+For this you'll have to provide the following custom files:
 
 * `buildout.cfg`
+* `Dockerfile`
 
 Below is an example of `buildout.cfg` and `Dockerfile` to build a custom version
-of Plone with your custom versions of packages based on this image:
+of Plone with your custom versions of packages based on `EEA KGS` image:
 
 **buildout.cfg**:
 
@@ -95,6 +96,7 @@ of Plone with your custom versions of packages based on this image:
     extends = eea.cfg
 
     auto-checkout =
+      land.copernicus.theme
       land.copernicus.content
 
     [configuration]
@@ -103,7 +105,9 @@ of Plone with your custom versions of packages based on this image:
       land.copernicus.content
 
     [sources]
+    land.copernicus.theme = git https://github.com/eea/land.copernicus.theme.git
     land.copernicus.content = git https://github.com/eea/land.copernicus.content.git
+
 
 **Dockerfile**:
 
@@ -114,8 +118,7 @@ of Plone with your custom versions of packages based on this image:
 
 and then run
 
-    $ docker build -t copernicus .
-
+    $ docker build -t plone-land-copernicus .
 
 ## Persist/Migrate data
 
