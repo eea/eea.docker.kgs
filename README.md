@@ -61,27 +61,24 @@ of Plone with your custom versions of packages based on this image:
     auto-checkout =
       land.copernicus.content
 
-    [instance]
+    [configuration]
     eggs +=
       land.copernicus.theme
       land.copernicus.content
-
-    [versions]
-    land.copernicus.theme = 1.7
 
     [sources]
     land.copernicus.content = git https://github.com/eea/land.copernicus.content.git
 
 **Dockerfile**:
 
-    FROM eeacms/kgs:6.0
+    FROM eeacms/kgs:6.4
 
     COPY buildout.cfg /plone/instance/
     RUN buildout
 
 and then run
 
-    $ docker build -t copernicus:6.0 .
+    $ docker build -t copernicus .
 
 
 ## Persist/Migrate data
