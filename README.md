@@ -144,7 +144,7 @@ Update `KGS_VERSION` env within `Dockerfile`
 
 Commit changes
 
-    $ git commit -a "Release 19.5"
+    $ git commit -am "Release 19.5"
 
 Create tag
 
