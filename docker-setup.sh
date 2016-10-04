@@ -34,6 +34,7 @@ runDeps="
   libpq5
   libmemcached11
   libmagickcore-6.q16-2-extra
+  lynx
   wv
   graphviz
   ImageMagick
