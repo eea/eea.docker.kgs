@@ -11,5 +11,3 @@ COPY src/* /tmp/
 USER root
 RUN /docker-setup.sh
 USER plone
-
-VOLUME /data/downloads
