@@ -1,4 +1,4 @@
-FROM plone/plone:4.3.10
+FROM plone:4.3.10
 MAINTAINER "Alin Voinea" <alin.voinea@eaudeweb.ro>
 
 ENV ZC_BUILDOUT=2.5.1 \
