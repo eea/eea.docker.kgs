@@ -1,7 +1,7 @@
 # EEA Plone KGS w/ EEA Add-ons ready to run Docker image
 
 Docker image for Plone with EEA Common Add-ons available based on
-[EEA Common Plone Buildout](https://github.com/eea/eea.plonebuildout.core)
+[EEA Common Plone Buildout (KGS)](https://github.com/eea/eea.plonebuildout.core)
 
 This image is generic, thus you can obviously re-use it within
 your non-related EEA projects.
@@ -29,8 +29,9 @@ The used Plone version can be found within Dockerfile used to create this image.
 
 ## Versions
 
-* Plone 4.3.7
-* Zope  2.13.23
+* Python 2.7.12
+* Plone 4.3.10
+* Zope  2.13.24
 
 ## Simple Usage
 
@@ -38,7 +39,7 @@ The used Plone version can be found within Dockerfile used to create this image.
 
 Now, ask for http://localhost:8080/ in your workstation web browser and add a Plone site (default credentials `admin:admin`).
 
-See more at [plone](https://hub.docker.com/r/plone/plone/)
+See more at [plone](https://hub.docker.com/_/plone)
 
 ## Advanced usage (ZEO, RelStorage, etc.)
 
@@ -111,7 +112,7 @@ of Plone with your custom versions of packages based on `EEA KGS` image:
 
 **Dockerfile**:
 
-    FROM eeacms/kgs:6.4
+    FROM eeacms/kgs:8.4
 
     COPY buildout.cfg /plone/instance/
     RUN buildout
@@ -122,14 +123,18 @@ and then run
 
 ## Persist/Migrate data
 
-* [Plone: Persistent data as you wish](https://github.com/eea/eea.docker.plone#persistent-data-as-you-wish)
-* [ZEO: Persistent data as you wish](https://github.com/eea/eea.docker.zeoserver#persistent-data-as-you-wish)
+* [Plone/ZEO: Where to Store Data](https://github.com/plone/plone.docker/blob/master/docs/usage.rst#8-where-to-store-data)
 * [RelStorage: Persistent data as you wish](https://github.com/eea/eea.docker.postgres#persistent-data-as-you-wish)
 
 ## Upgrade
 
     $ docker pull eeacms/kgs
 
+## Supported environment variables
+
+* `ZOPE_MODE` Can be `zeoserver`, `standalone`, `zeo_client`, `zeo_async`,  `rel_client`, `rel_async`. Default `standalone`
+* `GRAYLOG` Configure zope inside container to send logs to GrayLog. Disabled by default. (e.g.: `GRAYLOG=logs.example.com:12201`)
+* `GRAYLOG_FACILITY` Custom GrayLog facility. Default `ZOPE_MODE` (e.g.: `GRAYLOG_FACILITY=auth`)
 
 ## Release new versions of this image
 

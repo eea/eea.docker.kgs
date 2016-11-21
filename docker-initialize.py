@@ -42,12 +42,11 @@ def zope_log(mode, graylog):
             print "eea.graylogger already configured."
             return
 
-    with open('/etc/hostname', 'r') as hfile:
-        facilty = hfile.read().strip()
-        print "Sending logs to graylog: '%s' as facilty: '%s'" % (graylog, facilty)
+    facilty = os.environ.get('GRAYLOG_FACILITY', mode)
+    print "Sending logs to graylog: '%s' as facilty: '%s'" % (graylog, facilty)
 
-        template = GRAYLOG_TEMPLATE % (graylog, facilty)
-        conf = "%import eea.graylogger\n" + conf.replace('</logfile>', "</logfile>%s" % template)
+    template = GRAYLOG_TEMPLATE % (graylog, facilty)
+    conf = "%import eea.graylogger\n" + conf.replace('</logfile>', "</logfile>%s" % template)
 
     with open('/plone/instance/parts/%s/etc/zope.conf' % mode, 'w') as zfile:
         zfile.write(conf)
