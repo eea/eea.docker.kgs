@@ -97,8 +97,9 @@ class Environment(object):
             'force-connection-close on', 'force-connection-close %s' % self.force_connection_close)
 
     def finish(self):
+        conf = self.conf
         with open(self.zope_conf, 'w') as zfile:
-            zfile.write(self.conf)
+            zfile.write(conf)
 
     def setup(self):
         """ Configure
