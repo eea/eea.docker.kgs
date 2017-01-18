@@ -1,9 +1,9 @@
 #!/bin/bash
 #
-# Fix permissions for external volumes
+# Fix permissions
 #
 mkdir -vp /data/downloads/pdf
 mkdir -vp /data/downloads/tmp
-chown -vR plone:plone /data/downloads
+chown -vR plone:plone /data/downloads /plone
 
 exec gosu plone /plone-entrypoint.sh "$@"
