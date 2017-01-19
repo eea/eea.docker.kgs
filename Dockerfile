@@ -4,7 +4,7 @@ MAINTAINER "Alin Voinea" <alin.voinea@eaudeweb.ro>
 ENV GOSU_VERSION=1.10 \
     ZC_BUILDOUT=2.5.1 \
     SETUPTOOLS=20.9.0 \
-    KGS_VERSION=8.9
+    KGS_VERSION=9.0
 
 USER root
 RUN mv /docker-entrypoint.sh /plone-entrypoint.sh
