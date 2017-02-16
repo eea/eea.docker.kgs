@@ -1,5 +1,5 @@
 FROM plone:4.3.10
-MAINTAINER "Alin Voinea" <alin.voinea@eaudeweb.ro>
+MAINTAINER "EEA: IDM2 A-Team" <eea-edw-a-team-alerts@googlegroups.com>
 
 ENV GOSU_VERSION=1.10 \
     ZC_BUILDOUT=2.5.1 \

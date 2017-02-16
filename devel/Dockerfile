@@ -1,9 +1,7 @@
 FROM eeacms/kgs
-MAINTAINER "Alin Voinea" <alin.voinea@eaudeweb.ro>
+MAINTAINER "EEA: IDM2 A-Team" <eea-edw-a-team-alerts@googlegroups.com>
 
-USER root
 RUN apt-get update \
- && apt-get install -y --no-install-recommends build-essential
-USER plone
-
-RUN buildout -c devel.cfg
+ && apt-get install -y --no-install-recommends build-essential \
+ && rm -vrf /var/lib/apt/lists/* \
+ && buildout -c devel.cfg
