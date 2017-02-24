@@ -1,57 +1,56 @@
-haproxy:
-  image: eeacms/haproxy
-  ports:
-  - 80:5000
-  - 1936:1936
-  links:
-  - plone
-  environment:
-  - BACKENDS_PORT=8080
-  - SERVICE_NAMES=plone
-  volumes:
-  - /etc/localtime:/etc/localtime:ro
+version: "2"
+services:
+  haproxy:
+    image: eeacms/haproxy
+    ports:
+    - 80:5000
+    - 1936:1936
+    depends_on:
+    - plone
+    environment:
+    - BACKENDS_PORT=8080
+    - SERVICE_NAMES=plone
 
-plone:
-  image: eeacms/kgs
-  links:
-  - postgres
-  - memcached
-  - postfix
-  environment:
-  - ZOPE_MODE=rel_client
+  plone:
+    image: eeacms/kgs
+    depends_on:
+    - postgres
+    - memcached
+    - postfix
+    environment:
+    - ZOPE_MODE=rel_client
 
-async:
-  image: eeacms/kgs
-  links:
-  - postgres
-  - memcached
-  - postfix
-  environment:
-  - ZOPE_MODE=rel_async
+  async:
+    image: eeacms/kgs
+    depends_on:
+    - postgres
+    - memcached
+    - postfix
+    environment:
+    - ZOPE_MODE=rel_async
 
-postgres:
-  image: eeacms/postgres
-  environment:
-  - POSTGRES_DBNAME=datafs zasync
-  - POSTGRES_DBUSER=zope
-  - POSTGRES_DBPASS=zope
-  - POSTGRES_USER=postgres
-  - POSTGRES_PASSWORD=postgres
-  volumes_from:
-  - data
+  postgres:
+    image: eeacms/postgres
+    environment:
+    - POSTGRES_DBNAME=datafs zasync
+    - POSTGRES_DBUSER=zope
+    - POSTGRES_DBPASS=zope
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=postgres
+    volumes:
+    - postgres-data:/var/lib/postgresql/data
 
-memcached:
-  image: eeacms/memcached
-  environment:
-  - MEMCACHED_MEMORY=2048
+  memcached:
+    image: memcached:alpine
+    command:
+    - "memcached"
+    - "-m"
+    - "2048"
 
-postfix:
-  image: eeacms/postfix
-  environment:
-  - MTP_HOST=eea.europa.eu
+  postfix:
+    image: eeacms/postfix
+    environment:
+    - MTP_HOST=eea.europa.eu
 
-data:
-  image: busybox
-  volumes:
-  - /var/lib/postgresql/data
-  command: chown -R 999:999 /var/lib/postgresql/data
+volumes:
+  postgres-data:

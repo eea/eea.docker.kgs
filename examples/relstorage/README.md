@@ -17,9 +17,6 @@ Docker image as a RelStorage client.
 
     $ cd my-plone-deployment/examples/relstorage
     $ docker-compose pull
-    $ docker-compose stop
-    $ docker-compose -f docker-remove.yml rm -v
-    $ docker-compose up -d --no-recreate
-    $ docker-compose logs
+    $ docker-compose up -d
 
 See [base image](https://github.com/eea/eea.docker.kgs) for information about this image.

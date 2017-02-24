@@ -17,9 +17,7 @@ Docker image as a ZEO client.
 
     $ cd my-plone-deployment/examples/zeoclient
     $ docker-compose pull
-    $ docker-compose stop
-    $ docker-compose -f docker-remove.yml rm -v
-    $ docker-compose up -d --no-recreate
+    $ docker-compose up -d
     $ docker-compose logs
 
 See [base image](https://github.com/eea/eea.docker.kgs) for information about this image.

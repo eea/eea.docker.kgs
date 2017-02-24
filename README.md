@@ -68,7 +68,9 @@ Start load balancer:
                  -p 1936:1936 \
                  --link=zclient1 \
                  --link=zclient2 \
+                 -e BACKENDS="zclient1 zclient2" \
                  -e BACKENDS_PORT=8080 \
+                 -e DNS_ENABLED=true \
              eeacms/haproxy
 
 Check load-balancer back-ends health at http://localhost:1936/ (default credentials `admin:admin`).
