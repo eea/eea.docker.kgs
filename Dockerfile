@@ -4,7 +4,7 @@ MAINTAINER "EEA: IDM2 A-Team" <eea-edw-a-team-alerts@googlegroups.com>
 ENV GOSU_VERSION=1.10 \
     ZC_BUILDOUT=2.5.1 \
     SETUPTOOLS=20.9.0 \
-    KGS_VERSION=9.5
+    KGS_VERSION=9.6
 
 USER root
 RUN mv /docker-entrypoint.sh /plone-entrypoint.sh
