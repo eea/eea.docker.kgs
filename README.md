@@ -162,8 +162,8 @@ Create tag
 
 Push changes
 
-    $ git push
     $ git push --tags
+    $ git push
 
 
 ## Copyright and license
