@@ -2,8 +2,8 @@ FROM plone:4.3.10
 MAINTAINER "EEA: IDM2 A-Team" <eea-edw-a-team-alerts@googlegroups.com>
 
 ENV GOSU_VERSION=1.10 \
-    ZC_BUILDOUT=2.5.1 \
-    SETUPTOOLS=20.9.0 \
+    ZC_BUILDOUT=2.9.3 \
+    SETUPTOOLS=33.1.1 \
     KGS_VERSION=9.9
 
 USER root
