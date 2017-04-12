@@ -52,21 +52,6 @@ fi
 
 rm -vrf $ZOPE_HOME/* $ZOPE_HOME/.installed.cfg
 
-
-echo "========================================================================="
-echo "Installing zc.buildout and setuptools"
-echo "========================================================================="
-
-if [ -z "$ZC_BUILDOUT" ]; then
-  ZC_BUILDOUT="2.2.1"
-fi
-
-if [ -z "$SETUPTOOLS" ]; then
-  SETUPTOOLS="7.0"
-fi
-
-pip install zc.buildout==$ZC_BUILDOUT setuptools==$SETUPTOOLS
-
 echo "========================================================================="
 echo "Installing $buildDeps"
 echo "========================================================================="
@@ -77,6 +62,28 @@ apt-get install -y --no-install-recommends $buildDeps
 if [ -z "$KGS_VERSION" ]; then
   KGS_VERSION="latest_kgs"
 fi
+
+echo "========================================================================="
+echo "Installing pip, zc.buildout and setuptools"
+echo "========================================================================="
+
+VERSION_CFG="https://raw.githubusercontent.com/eea/eea.plonebuildout.core/master/buildout-configs/kgs/$KGS_VERSION/versions.cfg"
+
+if [ -z "$PIP" ]; then
+  PIP=$(curl -sL $VERSION_CFG | grep "pip\s*=\s*" | sed 's/^.*\=\s*//g')
+fi
+
+if [ -z "$ZC_BUILDOUT" ]; then
+  ZC_BUILDOUT=$(curl -sL $VERSION_CFG | grep "zc\.buildout\s*=\s*" | sed 's/^.*\=\s*//g')
+fi
+
+if [ -z "$SETUPTOOLS" ]; then
+  SETUPTOOLS=$(curl -sL $VERSION_CFG | grep "setuptools\s*\=\s*" | sed 's/ *//g' | sed 's/=//g' | sed 's/[a-z]//g')
+fi
+
+echo "Running: pip install pip==$PIP zc.buildout==$ZC_BUILDOUT setuptools==$SETUPTOOLS"
+pip install pip==$PIP zc.buildout==$ZC_BUILDOUT setuptools==$SETUPTOOLS
+
 
 echo "========================================================================="
 echo "Installing gosu"
@@ -151,6 +158,7 @@ echo "========================================================================="
 echo "Fixing permissions..."
 echo "========================================================================="
 
+mkdir -p /data/suggestions
 mkdir -p /data/downloads/pdf
 mkdir -p /data/downloads/tmp
 mkdir -p /plone/instance/var/log/

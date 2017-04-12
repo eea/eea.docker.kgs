@@ -1,10 +1,10 @@
 FROM plone:4.3.10
-MAINTAINER "EEA: IDM2 A-Team" <eea-edw-a-team-alerts@googlegroups.com>
 
 ENV GOSU_VERSION=1.10 \
-    ZC_BUILDOUT=2.9.3 \
-    SETUPTOOLS=33.1.1 \
-    KGS_VERSION=9.9
+    KGS_VERSION=10.0
+
+LABEL eea-kgs-version=$KGS_VERSION \
+      maintainer="EEA: IDM2 A-Team <eea-edw-a-team-alerts@googlegroups.com>"
 
 USER root
 RUN mv /docker-entrypoint.sh /plone-entrypoint.sh
