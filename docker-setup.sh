@@ -5,6 +5,9 @@ buildDeps="
   git
   curl
   build-essential
+  libblas-dev
+  liblapack-dev
+  gfortran
   libexpat1-dev
   libc6-dev
   libjpeg-dev
