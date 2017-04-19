@@ -1,7 +1,7 @@
 FROM plone:4.3.10
 
 ENV GOSU_VERSION=1.10 \
-    KGS_VERSION=10.0
+    KGS_VERSION=10.1
 
 LABEL eea-kgs-version=$KGS_VERSION \
       maintainer="EEA: IDM2 A-Team <eea-edw-a-team-alerts@googlegroups.com>"
