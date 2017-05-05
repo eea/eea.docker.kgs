@@ -13,6 +13,10 @@ class Environment(object):
         self.fast_listen = self.env.get('ZOPE_FAST_LISTEN', '')
         self.force_connection_close = self.env.get('ZOPE_FORCE_CONNECTION_CLOSE', '')
 
+        self.keep_history = True
+        if self.env.get('RELSTORAGE_KEEP_HISTORY', 'true').lower() in ('false', 'no', '0'):
+            self.keep_history = False
+
         mode = self.env.get('ZOPE_MODE', 'standalone')
         conf = 'zope.conf'
         if mode == 'zeoserver':
@@ -96,6 +100,14 @@ class Environment(object):
         self.conf = self.conf.replace(
             'force-connection-close on', 'force-connection-close %s' % self.force_connection_close)
 
+    def relstorage_keep_history(self):
+        """ RelStorage keep-history
+        """
+        if self.keep_history:
+            return
+
+        self.conf = self.conf.replace('keep-history true', 'keep-history false')
+
     def finish(self):
         conf = self.conf
         with open(self.zope_conf, 'w') as zfile:
@@ -109,6 +121,7 @@ class Environment(object):
         self.zope_threads()
         self.zope_fast_listen()
         self.zope_force_connection_close()
+        self.relstorage_keep_history()
         self.finish()
 
     __call__ = setup

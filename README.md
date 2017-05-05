@@ -140,6 +140,7 @@ and then run
 * `ZOPE_FORCE_CONNECTION_CLOSE` Set to `on` to enforce Zope to set `Connection: close header`. Default `on` (e.g.: `ZOPE_FORCE_CONNECTION_CLOSE=off`)
 * `GRAYLOG` Configure zope inside container to send logs to GrayLog. Disabled by default. (e.g.: `GRAYLOG=logs.example.com:12201`)
 * `GRAYLOG_FACILITY` Custom GrayLog facility. Default `ZOPE_MODE` (e.g.: `GRAYLOG_FACILITY=auth`)
+* `RELSTORAGE_KEEP_HISTORY` history-preserving database schema, `true` by default (e.g.: `RELSTORAGE_KEEP_HISTORY=false`)
 
 ## Release new versions of this image
 
