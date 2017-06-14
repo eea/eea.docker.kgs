@@ -1,6 +1,7 @@
 FROM plone:4.3.10
 
-ENV GRAYLOG=logcentral.eea.europa.eu:12201 \
+ENV EDW_LOGGER_PUBLISHER=false \
+    GRAYLOG=logcentral.eea.europa.eu:12201 \
     GRAYLOG_FACILITY=eea.docker.kgs \
     GOSU_VERSION=1.10 \
     KGS_VERSION=11.1
