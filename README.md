@@ -138,8 +138,8 @@ and then run
 * `ZOPE_THREADS` Configure zserver-threads. Default `2` (e.g.: `ZOPE_THREADS=4`)
 * `ZOPE_FAST_LISTEN` Set to `off` to defer opening of the HTTP socket until the end of the Zope startup phase. Defaults to `off` (e.g.: `ZOPE_FAST_LISTEN=on`)
 * `ZOPE_FORCE_CONNECTION_CLOSE` Set to `on` to enforce Zope to set `Connection: close header`. Default `on` (e.g.: `ZOPE_FORCE_CONNECTION_CLOSE=off`)
-* `GRAYLOG` Configure zope inside container to send logs to GrayLog. Disabled by default. (e.g.: `GRAYLOG=logs.example.com:12201`)
-* `GRAYLOG_FACILITY` Custom GrayLog facility. Default `ZOPE_MODE` (e.g.: `GRAYLOG_FACILITY=auth`)
+* `GRAYLOG` Configure zope inside container to send logs to GrayLog. Default `logcentral.eea.europa.eu:12201`. (e.g.: `GRAYLOG=logs.example.com:12201`)
+* `GRAYLOG_FACILITY` Custom GrayLog facility. Default `eea.docker.kgs` (e.g.: `GRAYLOG_FACILITY=staging.example.com`)
 * `RELSTORAGE_KEEP_HISTORY` history-preserving database schema, `true` by default (e.g.: `RELSTORAGE_KEEP_HISTORY=false`)
 
 ## Release new versions of this image
