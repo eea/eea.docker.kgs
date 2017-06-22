@@ -41,9 +41,8 @@ services:
     - postgres-data:/var/lib/postgresql/data
 
   memcached:
-    image: memcached:alpine
+    image: memcached
     command:
-    - "memcached"
     - "-m"
     - "2048"
 

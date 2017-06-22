@@ -38,9 +38,8 @@ services:
     - ZOPE_MODE=zeoserver
 
   memcached:
-    image: memcached:alpine
+    image: memcached
     command:
-    - "memcached"
     - "-m"
     - "2048"
 
