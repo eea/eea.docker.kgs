@@ -66,11 +66,13 @@ class Environment(object):
         if not self.graylog:
             return
 
-        if 'eea.graylogger' in self.conf:
-            self.log('Sending logs to graylog: %s', self.graylog)
+        if self.mode == "zeoserver":
             return
 
         self.log("Sending logs to graylog: '%s' as facilty: '%s'", self.graylog, self.facility)
+
+        if 'eea.graylogger' in self.conf:
+            return
 
         template = GRAYLOG_TEMPLATE % (self.graylog, self.facility)
         self.conf = "%import eea.graylogger\n" + self.conf.replace('</logfile>', "</logfile>%s" % template)
