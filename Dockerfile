@@ -4,7 +4,7 @@ ENV EDW_LOGGER_PUBLISHER=false \
     GRAYLOG=logcentral.eea.europa.eu:12201 \
     GRAYLOG_FACILITY=eea.docker.kgs \
     GOSU_VERSION=1.10 \
-    KGS_VERSION=11.3
+    KGS_VERSION=11.4
 
 LABEL eea-kgs-version=$KGS_VERSION \
       maintainer="EEA: IDM2 A-Team <eea-edw-a-team-alerts@googlegroups.com>"
