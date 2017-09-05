@@ -1,29 +1,12 @@
 pipeline {
-  agent {
-    node {
-      label 'docker-1.10'
-    }
-    
-  }
+  agent any
   stages {
-    stage('Build Master') {
+    stage('Build') {
       steps {
-        sh 'docker build -t eeacms/kgs .'
-      }
-    }
-    stage('Build Devel') {
-      steps {
-        sh 'docker build -t eeacms/kgs:devel devel'
-      }
-    }
-    stage('Tests') {
-      steps {
-        sh 'docker run --rm eeacms/kgs:devel bin/test -s eea.plonebuildout.profile'
-      }
-    }
-    stage('Cleanup') {
-      steps {
-        sh 'docker rmi eeacms/kgs:devel eeacms/kgs'
+        node(label: 'docker-1.13') {
+          sh 'docker build -t eeacms/kgs .'
+        }
+        
       }
     }
   }
