@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+cd /plone/instance
 bin/develop rb
 
 if [ -z "$1" ]; then
@@ -43,6 +44,7 @@ if [ "$1" == "tests" ]; then
 
    ./bin/test --test-path /plone/instance/src/$i -v -vv -s $i
   done
+else
+  exec "$@"
 fi
 
-exec "$@"

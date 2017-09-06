@@ -11,6 +11,6 @@ LABEL eea-kgs-version=$KGS_VERSION \
 
 USER root
 RUN mv /docker-entrypoint.sh /plone-entrypoint.sh
-COPY docker-setup.sh docker-initialize.py kgs-entrypoint.sh docker-entrypoint.sh /
+COPY docker-setup.sh docker-initialize.py kgs-entrypoint.sh docker-entrypoint.sh debug.sh /
 COPY src/* /tmp/
 RUN /docker-setup.sh
