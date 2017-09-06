@@ -18,13 +18,14 @@ fi
 if [ "$1" == "tests" ]; then
  for i in $(ls src); do
 
-   AUTO_EXCLUDE="$(cat bin/test | grep src/$i)"
-   if [ -z "$AUTO_EXCLUDE" ]; then
+   # Auto exclude tests
+   if ! grep -q "$i" bin/test; then
        echo "============================================================="
        echo "Auto: Skipping tests for: $i                                 "
        continue
    fi
 
+   # Manual exclude tests
    if [ ! -z "$EXCLUDE" ]; then
      if [[ $EXCLUDE == *"$i"* ]]; then
        echo "============================================================="
@@ -33,8 +34,7 @@ if [ "$1" == "tests" ]; then
      fi
    fi
 
-
-
+   # Run tests
    echo "============================================================="
    echo "Running tests for:                                           "
    echo "                                                             "
