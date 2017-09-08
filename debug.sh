@@ -3,6 +3,7 @@ set -e
 
 cd /plone/instance
 bin/develop rb
+python /docker-initialize.py
 
 if [ -z "$1" ]; then
   echo "============================================================="
