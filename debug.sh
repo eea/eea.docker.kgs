@@ -5,6 +5,14 @@ cd /plone/instance
 bin/develop rb
 python /docker-initialize.py
 
+if [ ! -z "$GIT_NAME" ]; then
+  if [ ! -z "$GIT_BRANCH" ]; then
+    cd src/$GIT_NAME
+    git checkout $GIT_BRANCH
+    cd ../..
+  fi
+fi
+
 if [ -z "$1" ]; then
   echo "============================================================="
   echo "All set. Now you can dive into container and start debugging:"
