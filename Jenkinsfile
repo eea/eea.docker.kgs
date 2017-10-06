@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-    EXCLUDE = 'Products.ZSPARQLMethod sparql-client eea.google'
+    EXCLUDE = 'eea.google'
   }
 
   stages {
@@ -28,7 +28,7 @@ docker run -i --net=host --name="$BUILD_TAG" -e EXCLUDE="$EXCLUDE" eeacms/kgs-de
 echo "INFO: Cleanning up"
 docker rm -v $BUILD_TAG'''
         }
-        
+
       }
     }
   }
