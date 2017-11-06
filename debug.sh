@@ -8,6 +8,9 @@ python /docker-initialize.py
 if [ ! -z "$GIT_NAME" ]; then
   if [ ! -z "$GIT_BRANCH" ]; then
     cd src/$GIT_NAME
+    if [ ! -z "$GIT_CHANGE_ID" ]; then
+       git fetch origin pull/$GIT_CHANGE_ID/head:$GIT_BRANCH
+    fi
     git checkout $GIT_BRANCH
     cd ../..
   fi
