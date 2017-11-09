@@ -11,6 +11,7 @@ pipeline {
         node(label: 'docker-1.13') {
           script {
             try {
+              checkout scm
               sh '''docker build -t eeacms/kgs .'''
               sh '''docker build -t eeacms/kgs-devel devel'''
               sh '''docker run -i --net=host --name="$BUILD_TAG" -e EXCLUDE="$EXCLUDE" eeacms/kgs-devel /debug.sh tests'''
