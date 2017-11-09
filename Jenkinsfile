@@ -12,11 +12,14 @@ pipeline {
           script {
             try {
               checkout scm
-              sh '''docker build -t eeacms/kgs .'''
-              sh '''docker build -t eeacms/kgs-devel devel'''
-              sh '''docker run -i --net=host --name="$BUILD_TAG" -e EXCLUDE="$EXCLUDE" eeacms/kgs-devel /debug.sh tests'''
+              sh '''docker build -t ${BUILD_TAG} .'''
+              sh '''sed -i "s|eeacms/kgs|${BUILD_TAG}|g" devel/Dockerfile'''
+              sh '''docker build -t ${BUILD_TAG}-devel devel'''
+              sh '''docker run -i --net=host --name="${BUILD_TAG}" -e EXCLUDE="${EXCLUDE}" eeacms/kgs-devel /debug.sh tests'''
             } finally {
-              sh '''docker rm -v $BUILD_TAG'''
+              sh '''docker rm -v ${BUILD_TAG}'''
+              sh '''docker rmi ${BUILD_TAG}-devel'''
+              sh '''docker rmi ${BUILD_TAG}'''
             }
           }
         }
