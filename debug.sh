@@ -2,9 +2,6 @@
 set -e
 
 cd /plone/instance
-bin/develop rb
-python /docker-initialize.py
-
 if [ ! -z "$GIT_NAME" ]; then
   if [ ! -z "$GIT_BRANCH" ]; then
     cd src/$GIT_NAME
@@ -15,6 +12,8 @@ if [ ! -z "$GIT_NAME" ]; then
     cd ../..
   fi
 fi
+bin/develop rb
+python /docker-initialize.py
 
 if [ -z "$1" ]; then
   echo "============================================================="
