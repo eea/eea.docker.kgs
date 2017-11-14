@@ -6,4 +6,4 @@ COPY versions.cfg /plone/instance/
 RUN apt-get update \
  && apt-get install -y --no-install-recommends build-essential \
  && rm -vrf /var/lib/apt/lists/* \
- && buildout -c devel.cfg
+ && gosu plone buildout -c devel.cfg
