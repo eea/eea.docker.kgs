@@ -10,6 +10,7 @@ if [ ! -z "$GIT_NAME" ]; then
     fi
     git checkout $GIT_BRANCH
     cd ../..
+    sed -i "s|^$GIT_NAME .*$|$GIT_NAME = fs $GIT_NAME|g" sources.cfg
   fi
 fi
 bin/develop rb
