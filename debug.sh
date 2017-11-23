@@ -5,6 +5,7 @@ cd /plone/instance
 if [ ! -z "$GIT_NAME" ]; then
   if [ ! -z "$GIT_BRANCH" ]; then
     cd src/$GIT_NAME
+    git pull
     if [ ! -z "$GIT_CHANGE_ID" ]; then
        git fetch origin pull/$GIT_CHANGE_ID/head:$GIT_BRANCH
     fi
