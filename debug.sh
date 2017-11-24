@@ -12,6 +12,10 @@ if [ ! -z "$GIT_NAME" ]; then
     git checkout $GIT_BRANCH
     cd ../..
     sed -i "s|^$GIT_NAME .*$|$GIT_NAME = fs $GIT_NAME|g" sources.cfg
+    if [[ "$GIT_BRANCH" == "master" || "$GIT_BRANCH" == "hotfix"* ||  "$GIT_BRANCH" == "HOTFIX"* ||  "$GIT_BRANCH" == "Hotfix"* ||  "$GIT_BRANCH" == "HotFix"* || ! -z "$GIT_CHANGE_ID" ]]; then
+      echo "The other branches from sources.cfg will be set to master"
+      sed -i "s/branch=develop/branch=master/g" sources.cfg
+    fi
   fi
 fi
 bin/develop rb
