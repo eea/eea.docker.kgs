@@ -8,16 +8,25 @@ if [ ! -z "$GIT_NAME" ]; then
     git pull
     if [ ! -z "$GIT_CHANGE_ID" ]; then
        git fetch origin pull/$GIT_CHANGE_ID/head:$GIT_BRANCH
+       git checkout $GIT_BRANCH
+    else
+       git checkout $GIT_BRANCH
+       git pull
     fi
-    git checkout $GIT_BRANCH
     cd ../..
     sed -i "s|^$GIT_NAME .*$|$GIT_NAME = fs $GIT_NAME|g" sources.cfg
-    if [[ "$GIT_BRANCH" == "master" || "$GIT_BRANCH" == "hotfix"* ||  "$GIT_BRANCH" == "HOTFIX"* ||  "$GIT_BRANCH" == "Hotfix"* ||  "$GIT_BRANCH" == "HotFix"* || ! -z "$GIT_CHANGE_ID" ]]; then
-      echo "The other branches from sources.cfg will be set to master"
-      sed -i "s/branch=develop/branch=master/g" sources.cfg
+    if [[ "$GIT_BRANCH" == "hotfix"* ||  "$GIT_BRANCH" == "HOTFIX"* ||  "$GIT_BRANCH" == "Hotfix"* ||  "$GIT_BRANCH" == "HotFix"* || ! -z "$GIT_CHANGE_ID" ]]; then
+      echo "Switching sources.cfg to master"
+      sed -i "s|branch=develop|branch=master|g" sources.cfg
     fi
   fi
 fi
+
+if [[ "$GIT_BRANCH" == "master" ]]; then
+  echo "Switching sources.cfg to master"
+  sed -i "s|branch=develop|branch=master|g" sources.cfg
+fi
+
 bin/develop rb
 python /docker-initialize.py
 
