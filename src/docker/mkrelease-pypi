@@ -1,0 +1,23 @@
+#!/bin/bash
+
+echo "=================="
+git pull
+echo "=================="
+git status
+echo "=================="
+
+TAG="$1"
+echo "TAG: $TAG"
+if [ ! -z "$TAG" ]; then
+    git checkout $TAG
+fi
+
+echo "=================="
+head -20 docs/HISTORY.txt
+echo ""
+echo ""
+read -p "Press ENTER to continue: " var
+if [ ${#var} -eq 0 ]; then
+  mkrelease -CT -d pypi .
+fi
+git checkout master

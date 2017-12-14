@@ -44,17 +44,6 @@ runDeps="
   ghostscript
 "
 
-
-echo "========================================================================="
-echo "Cleaning up previous Plone installation..."
-echo "========================================================================="
-
-if [ -z "$ZOPE_HOME" ]; then
-  ZOPE_HOME="/plone/instance"
-fi
-
-rm -vrf $ZOPE_HOME/* $ZOPE_HOME/.installed.cfg
-
 echo "========================================================================="
 echo "Installing $buildDeps"
 echo "========================================================================="
@@ -62,26 +51,22 @@ echo "========================================================================="
 apt-get update
 apt-get install -y --no-install-recommends $buildDeps
 
-if [ -z "$KGS_VERSION" ]; then
-  KGS_VERSION="latest_kgs"
-fi
-
 echo "========================================================================="
 echo "Installing pip, zc.buildout and setuptools"
 echo "========================================================================="
 
-VERSION_CFG="https://raw.githubusercontent.com/eea/eea.plonebuildout.core/master/buildout-configs/kgs/$KGS_VERSION/versions.cfg"
+VERSION_CFG="/plone/instance/versions.cfg"
 
 if [ -z "$PIP" ]; then
-  PIP=$(curl -sL $VERSION_CFG | grep "pip\s*=\s*" | sed 's/^.*\=\s*//g')
+  PIP=$(cat $VERSION_CFG | grep "pip\s*=\s*" | sed 's/^.*\=\s*//g')
 fi
 
 if [ -z "$ZC_BUILDOUT" ]; then
-  ZC_BUILDOUT=$(curl -sL $VERSION_CFG | grep "zc\.buildout\s*=\s*" | sed 's/^.*\=\s*//g')
+  ZC_BUILDOUT=$(cat $VERSION_CFG | grep "zc\.buildout\s*=\s*" | sed 's/^.*\=\s*//g')
 fi
 
 if [ -z "$SETUPTOOLS" ]; then
-  SETUPTOOLS=$(curl -sL $VERSION_CFG | grep "setuptools\s*\=\s*" | sed 's/ *//g' | sed 's/=//g' | sed 's/[a-z]//g')
+  SETUPTOOLS=$(cat $VERSION_CFG | grep "setuptools\s*\=\s*" | sed 's/ *//g' | sed 's/=//g' | sed 's/[a-z]//g')
 fi
 
 echo "Running: pip install pip==$PIP zc.buildout==$ZC_BUILDOUT setuptools==$SETUPTOOLS"
@@ -110,19 +95,6 @@ curl -o /tmp/wkhtmltopdf.tgz -SL https://svn.eionet.europa.eu/repositories/Zope/
 tar -zxvf /tmp/wkhtmltopdf.tgz -C /tmp/
 mv -v /tmp/wkhtmltopdf /usr/bin/
 
-
-echo "========================================================================="
-echo "Getting KGS=$KGS_VERSION"
-echo "========================================================================="
-
-git clone https://github.com/eea/eea.plonebuildout.core.git /tmp/eea.plonebuildout.core
-cp -v /tmp/eea.plonebuildout.core/buildout-configs/kgs/$KGS_VERSION/*.cfg $ZOPE_HOME/
-cp -v /tmp/eea.plonebuildout.core/updates.sh $ZOPE_HOME/
-cp -v /tmp/eea.plonebuildout.core/buildout-configs/sources.cfg $ZOPE_HOME/
-cp -v /tmp/eea.plonebuildout.core/buildout-configs/base-zope.cfg $ZOPE_HOME/
-cp -v /tmp/*.cfg $ZOPE_HOME/
-
-
 echo "========================================================================="
 echo "Running buildout -c buildout.cfg"
 echo "========================================================================="
@@ -133,7 +105,7 @@ echo "========================================================================="
 echo "Update KGS version"
 echo "========================================================================="
 
-./updates.sh
+/updates.sh
 
 echo "========================================================================="
 echo "Unininstalling $buildDeps"

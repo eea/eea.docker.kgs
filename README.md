@@ -2,8 +2,7 @@
 
 [![Build Status](http://ci.eionet.europa.eu/job/eea/job/eea.docker.kgs/job/master/badge/icon)](http://ci.eionet.europa.eu/job/eea/job/eea.docker.kgs/job/master/display/redirect)
 
-Docker image for Plone with EEA Common Add-ons available based on
-[EEA Common Plone Buildout (KGS)](https://github.com/eea/eea.plonebuildout.core)
+Docker image for Plone with EEA Common Add-ons available (formerly known as [EEA Common Plone Buildout (KGS)](https://github.com/eea/eea.plonebuildout.core)
 
 This image is generic, thus you can obviously re-use it within
 your non-related EEA projects.
@@ -11,10 +10,6 @@ your non-related EEA projects.
 ## Supported tags and respective Dockerfile links
 
   - [Tags](https://hub.docker.com/r/eeacms/kgs/tags/)
-
-These tags have nothing to do with Plone version. They refer to the
-[EEA KGS versions](https://github.com/eea/eea.plonebuildout.core/tree/master/buildout-configs/kgs).
-The used Plone version can be found within Dockerfile used to create this image.
 
 ## Base docker image
 
