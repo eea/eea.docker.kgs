@@ -9,15 +9,13 @@ def main(argv):
     print '*** Release candidates list ***'
     print '==============================='
 
-    packages = listdir('./src')
+    packages = listdir('/plone/instance/src')
     packages.sort()
     found = False
     for cand_d in packages:
-
         try:
-            cand_f = open('./src/%s/docs/HISTORY.txt' % cand_d)
+            cand_f = open('/plone/instance/src/%s/docs/HISTORY.txt' % cand_d)
         except IOError:
-            #print 'No HISTORY.txt found: %s' % cand_d
             continue
         cand_s = mmap.mmap(cand_f.fileno(), 0, access=mmap.ACCESS_READ)
         cand_n = cand_s.rfind('unreleased')

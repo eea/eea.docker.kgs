@@ -130,6 +130,13 @@ rm -vrf /plone/buildout-cache/downloads/*
 rm -vrf /tmp/*
 
 echo "========================================================================="
+echo "mkrelease..."
+echo "========================================================================="
+
+ln -s /plone/instance/bin/mkrelease /usr/local/bin/mkrelease
+ln -s /mkrelease-pypi /usr/local/bin/mkrelease-pypi
+
+echo "========================================================================="
 echo "Fixing permissions..."
 echo "========================================================================="
 
