@@ -145,7 +145,7 @@ Get source code
 
     $ git clone git@github.com:eea/eea.docker.kgs.git
 
-Update `KGS_VERSION` env within `Dockerfile`
+Update `EEA_KGS_VERSION` env within `Dockerfile`
 
     $ cd eea.docker.kgs
     $ vim Dockerfile
