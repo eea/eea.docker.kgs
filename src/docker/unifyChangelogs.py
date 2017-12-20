@@ -94,7 +94,7 @@ def main():
     before = dict(before)
     sources = dict(sources)
     for package, version in after:
-        previous = before.get(package, StrictVersion(0))
+        previous = before.get(package, StrictVersion('0.0'))
         if version <= previous:
             continue
 
