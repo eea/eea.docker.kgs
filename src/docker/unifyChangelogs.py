@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/plone/instance/bin/zopepy
 """
 
 Usage:
@@ -20,7 +20,8 @@ from docutils.core import publish_doctree
 import sys
 
 SOURCES = 'https://raw.githubusercontent.com/eea/eea.docker.kgs/master/src/plone/sources.cfg'
-VERSION = 'https://raw.githubusercontent.com/eea/eea.docker.kgs/{version}/src/plone/versions.cfg'
+KGS_VERSION = 'https://raw.githubusercontent.com/eea/eea.docker.kgs/{version}/src/plone/versions.cfg'
+OLD_VERSION = "https://raw.githubusercontent.com/eea/eea.plonebuildout.core/master/buildout-configs/kgs/{version}/versions.cfg"
 
 def pullVersions(url):
     """ Compute versions
@@ -71,14 +72,20 @@ def main():
     except ValueError:
         before = sys.argv[1]
     else:
-        before = VERSION.format(version=before)
+        if before < StrictVersion('14.0'):
+            before = OLD_VERSION.format(version=before)
+        else:
+            before = KGS_VERSION.format(version=before)
 
     try:
         after = StrictVersion(sys.argv[2])
     except ValueError:
         after = sys.argv[2]
     else:
-        after = VERSION.format(version=after)
+        if after < StrictVersion('14.0'):
+            after = OLD_VERSION.format(version=after)
+        else:
+            after = KGS_VERSION.format(version=after)
 
     before = pullVersions(before)
     after = pullVersions(after)
