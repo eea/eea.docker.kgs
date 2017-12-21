@@ -7,6 +7,7 @@ if [ ! -z "$GIT_NAME" ]; then
     cd src/$GIT_NAME
     git pull
     if [ ! -z "$GIT_CHANGE_ID" ]; then
+       GIT_BRANCH=PR-${GIT_CHANGE_ID}
        git fetch origin pull/$GIT_CHANGE_ID/head:$GIT_BRANCH
        git checkout $GIT_BRANCH
     else
