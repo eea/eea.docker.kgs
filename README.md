@@ -120,6 +120,7 @@ and then run
 
     $ docker build -t plone-land-copernicus .
 
+
 ## Persist/Migrate data
 
 * [Plone/ZEO: Where to Store Data](https://github.com/plone/plone.docker/blob/master/docs/usage.rst#8-where-to-store-data)
@@ -128,6 +129,7 @@ and then run
 ## Upgrade
 
     $ docker pull eeacms/kgs
+
 
 ## Supported environment variables
 
@@ -138,6 +140,7 @@ and then run
 * `GRAYLOG` Configure zope inside container to send logs to GrayLog. Default `logcentral.eea.europa.eu:12201`. (e.g.: `GRAYLOG=logs.example.com:12201`)
 * `GRAYLOG_FACILITY` Custom GrayLog facility. Default `eea.docker.kgs` (e.g.: `GRAYLOG_FACILITY=staging.example.com`)
 * `RELSTORAGE_KEEP_HISTORY` history-preserving database schema, `true` by default (e.g.: `RELSTORAGE_KEEP_HISTORY=false`)
+
 
 ## Release new versions of this image
 
@@ -162,6 +165,13 @@ Push changes
 
     $ git push --tags
     $ git push
+
+Update release notes
+
+    $ docker run -it --rm -e GIT_NAME="eea.docker.kgs" eeacms/gitflow bash
+    $ /unifyChangelogs.py 19.4 19.5 2> /dev/null
+
+Add output to https://github.com/eea/eea.docker.kgs/releases/new
 
 
 ## Copyright and license
