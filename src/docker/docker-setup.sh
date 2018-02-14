@@ -143,24 +143,30 @@ echo "========================================================================="
 mkdir -p /data/suggestions
 mkdir -p /data/downloads/pdf
 mkdir -p /data/downloads/tmp
-mkdir -p /plone/instance/var/log/
+mkdir -p /data/log
 
-touch /plone/instance/var/log/instance.log
-touch /plone/instance/var/log/instance-Z2.log
+touch /data/log/instance.log
+touch /data/log/instance-Z2.log
 
-touch /plone/instance/var/log/standalone.log
-touch /plone/instance/var/log/standalone-Z2.log
+touch /data/log/standalone.log
+touch /data/log/standalone-Z2.log
 
-touch /plone/instance/var/log/zeo_client.log
-touch /plone/instance/var/log/zeo_client-Z2.log
+touch /data/log/zeo_client.log
+touch /data/log/zeo_client-Z2.log
 
-touch /plone/instance/var/log/zeo_async.log
-touch /plone/instance/var/log/zeo_async-Z2.log
+touch /data/log/zeo_async.log
+touch /data/log/zeo_async-Z2.log
 
-touch /plone/instance/var/log/rel_async.log
-touch /plone/instance/var/log/rel_async-Z2.log
+touch /data/log/rel_async.log
+touch /data/log/rel_async-Z2.log
 
-touch /plone/instance/var/log/rel_client.log
-touch /plone/instance/var/log/rel_client-Z2.log
+touch /data/log/rel_client.log
+touch /data/log/rel_client-Z2.log
+
+# BBB - Backward compatibility
+mkdir -p /plone/instance/var
+rm -rf /plone/instance/var/log
+ln -s /data/log /plone/instance/var/log
+# BBB - end
 
 chown -vR plone:plone /plone /data
