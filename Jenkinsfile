@@ -12,13 +12,15 @@ pipeline {
   stages {
     stage('Build & Test') {
       steps {
-        node(label: 'docker-1.13') {
+        node(label: 'clair') {
           script {
             try {
               checkout scm
               sh '''sed -i "s|eeacms/kgs|${BUILD_TAG}|g" devel/Dockerfile'''
               sh "docker build -t ${BUILD_TAG} ."
+              sh "clair-scanner --ip=$(hostname) --clair=https://clair.eea.europa.eu -t=Critical ${BUILD_TAG}"
               sh "docker build -t ${BUILD_TAG}-devel devel"
+              sh "clair-scanner --ip=$(hostname) --clair=https://clair.eea.europa.eu -t=Critical ${BUILD_TAG}-devel"
               sh "docker run -i --name=${BUILD_TAG} -e EXCLUDE=${EXCLUDE} -e GIT_BRANCH=${params.TARGET_BRANCH} ${BUILD_TAG}-devel /debug.sh tests"
             } finally {
               sh "docker rm -v ${BUILD_TAG}"
