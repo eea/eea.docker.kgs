@@ -13,6 +13,10 @@ class Environment(object):
         self.fast_listen = self.env.get('ZOPE_FAST_LISTEN', '')
         self.force_connection_close = self.env.get('ZOPE_FORCE_CONNECTION_CLOSE', '')
 
+        self.postgres_host = self.env.get("RELSTORAGE_HOST", None)
+        self.postgres_user = self.env.get("RELSTORAGE_USER", None)
+        self.postgres_password = self.env.get("RELSTORAGE_PASS", None)
+
         self.keep_history = True
         if self.env.get('RELSTORAGE_KEEP_HISTORY', 'true').lower() in ('false', 'no', '0'):
             self.keep_history = False
@@ -102,6 +106,30 @@ class Environment(object):
         self.conf = self.conf.replace(
             'force-connection-close on', 'force-connection-close %s' % self.force_connection_close)
 
+    def relstorage_host(self):
+        """ RelStorage host
+        """
+        if not self.postgres_host:
+            return
+
+        self.conf = self.conf.replace("host='postgres'", "host='%s'" % self.postgres_host)
+
+    def relstorage_user(self):
+        """ RelStorage user
+        """
+        if not self.postgres_user:
+            return
+
+        self.conf = self.conf.replace("user='zope'", "user='%s'" % self.postgres_user)
+
+    def relstorage_password(self):
+        """ RelStorage password
+        """
+        if not self.postgres_password:
+            return
+
+        self.conf = self.conf.replace("password='zope'", "password='%s'" % self.postgres_password)
+
     def relstorage_keep_history(self):
         """ RelStorage keep-history
         """
@@ -123,6 +151,9 @@ class Environment(object):
         self.zope_threads()
         self.zope_fast_listen()
         self.zope_force_connection_close()
+        self.relstorage_host()
+        self.relstorage_user()
+        self.relstorage_password()
         self.relstorage_keep_history()
         self.finish()
 
