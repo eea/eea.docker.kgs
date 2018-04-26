@@ -59,6 +59,7 @@ class Github(object):
         self.repos = []
         self.username = ''
         self.password = ''
+        self.token = os.environ.get("GITHUB_TOKEN", "")
 
         self.loglevel = loglevel
         self._logger = None
@@ -92,8 +93,11 @@ class Github(object):
         """ Complex request
         """
         req = urllib2.Request(url)
-        req.add_header("Authorization", "Basic " + base64.urlsafe_b64encode(
-            "%(username)s:%(password)s" % self.credentials))
+        if self.token:
+            req.add_header("Authorization", "token %s" % self.token)
+        else:
+            req.add_header("Authorization", "Basic " + base64.urlsafe_b64encode(
+                "%(username)s:%(password)s" % self.credentials))
         req.add_header("Content-Type", "application/json")
         req.add_header("Accept", "application/json")
         return req
