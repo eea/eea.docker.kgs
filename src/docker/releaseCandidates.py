@@ -18,7 +18,6 @@ def main(argv):
         except IOError:
             continue
         cand_s = mmap.mmap(cand_f.fileno(), 0, access=mmap.ACCESS_READ)
-        cand_n = cand_s.rfind('unreleased')
 
         for k in range(5):
             cand_s.readline()

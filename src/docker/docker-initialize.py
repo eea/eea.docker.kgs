@@ -1,6 +1,8 @@
 #!/plone/instance/bin/python
 
 import os
+from contextlib import closing
+import urllib2
 from shutil import copy
 
 
@@ -36,7 +38,28 @@ class Environment(object):
         self.graylog = self.env.get('GRAYLOG', '')
         self.facility = self.env.get('GRAYLOG_FACILITY', self.mode)
 
+        self.version = self.env.get('EEA_APP_VERSION',
+                       self.env.get('EEA_KGS_VERSION', ''))
+        self.name = self.env.get('SERVER_NAME', '')
+        self.sentry = self.env.get('SENTRY_DSN', '')
+        self._environment = self.env.get('ENVIRONMENT',
+                            self.env.get('SENTRY_ENVIRONMENT', ''))
+
         self._conf = ''
+
+    @property
+    def environment(self):
+        """ Try to get environment from rancher-metadata
+        """
+        if not self._environment:
+            url = "http://rancher-metadata/latest/self/stack/environment_name"
+            try:
+                with closing(urllib2.urlopen(url)) as conn:
+                    self._environment = conn.read()
+            except Exception as err:
+                self.log("Couldn't get environment from rancher-metadata: %s.", err)
+                self._environment = "devel"
+        return self._environment
 
     @property
     def conf(self):
@@ -64,22 +87,41 @@ class Environment(object):
         self.log("Using bin/%s", self.mode)
         copy('/plone/instance/bin/%s' % self.mode, '/plone/instance/bin/instance')
 
-    def zope_log(self):
-        """ Zope logging
+    def setup_graylog(self):
+        """ Send logs to graylog
         """
         if not self.graylog:
             return
 
-        if self.mode == "zeoserver":
-            return
-
         self.log("Sending logs to graylog: '%s' as facilty: '%s'", self.graylog, self.facility)
-
         if 'eea.graylogger' in self.conf:
             return
 
         template = GRAYLOG_TEMPLATE % (self.graylog, self.facility)
         self.conf = "%import eea.graylogger\n" + self.conf.replace('</logfile>', "</logfile>%s" % template)
+
+    def setup_sentry(self):
+        """ Send tracebacks to sentry
+        """
+        if not self.sentry:
+            return
+
+        self.log("Sending errors to sentry. Environment: %s", self.environment)
+        if 'raven.contrib.zope' in self.conf:
+            return
+
+        template = SENTRY_TEMPLATE % (self.name, self.version, self.environment)
+        self.conf = "%import raven.contrib.zope\n" + self.conf.replace('</logfile>', '</logfile%s' % template)
+
+
+    def zope_log(self):
+        """ Zope logging
+        """
+        if self.mode == "zeoserver":
+            return
+
+        self.setup_graylog()
+        self.setup_sentry()
 
     def zope_threads(self):
         """ Zope threads
@@ -167,6 +209,14 @@ GRAYLOG_TEMPLATE = """
   </graylog>
 """
 
+SENTRY_TEMPLATE = """
+  <sentry>
+    level ERROR
+    site %s
+    release %s
+    environment %s
+  </sentry>
+"""
 
 def initialize():
     """ Configure
