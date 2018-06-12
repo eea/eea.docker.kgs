@@ -215,6 +215,7 @@ SENTRY_TEMPLATE = """
     site %s
     release %s
     environment %s
+    processors eea.plonebuildout.profile.processors.SanitizeZopeProcessor
   </sentry>
 """
 
