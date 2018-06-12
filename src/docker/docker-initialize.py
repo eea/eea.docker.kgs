@@ -111,7 +111,7 @@ class Environment(object):
             return
 
         template = SENTRY_TEMPLATE % (self.name, self.version, self.environment)
-        self.conf = "%import raven.contrib.zope\n" + self.conf.replace('</logfile>', '</logfile%s' % template)
+        self.conf = "%import raven.contrib.zope\n" + self.conf.replace('</logfile>', '</logfile>%s' % template)
 
 
     def zope_log(self):
