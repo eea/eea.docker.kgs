@@ -19,6 +19,7 @@ buildDeps="
   libssl-dev
   libxml2-dev
   libxslt-dev
+  libxslt1-dev
   libz-dev
   zlib1g-dev
 "
