@@ -31,7 +31,7 @@ runDeps="
   subversion
   tex-gyre
   poppler-utils
-  libpng12-0
+  libpng16-16
   libjpeg62
   libxml2
   libxslt1.1
@@ -41,7 +41,7 @@ runDeps="
   lynx
   wv
   graphviz
-  ImageMagick
+  imagemagick
   ghostscript
 "
 
