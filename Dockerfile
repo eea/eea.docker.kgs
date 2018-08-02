@@ -11,7 +11,7 @@ LABEL eea-kgs-version=$EEA_KGS_VERSION \
 
 RUN mv /docker-entrypoint.sh /plone-entrypoint.sh \
  && mv -v versions.cfg plone-versions.cfg \
- && ls -a | grep .cfg | grep -v zope | grep -v plone | xargs rm
+ && ls -a *.cfg | grep -v zope | grep -v plone | xargs rm
 
 COPY src/docker/* /
 COPY src/plone/* /plone/instance/
