@@ -37,7 +37,7 @@ runDeps="
   libxslt1.1
   libpq5
   libmemcached11
-  libmagickcore-6.q16-2-extra
+  libmagickcore-6.q16-3-extra
   lynx
   wv
   graphviz
