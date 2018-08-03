@@ -33,6 +33,7 @@ runDeps="
   poppler-utils
   libpng16-16
   libjpeg62
+  libssl1.0-dev
   libxml2
   libxslt1.1
   libpq5
@@ -77,7 +78,7 @@ echo "========================================================================="
 echo "Installing wkhtmltopdf..."
 echo "========================================================================="
 
-curl -o /tmp/wkhtmltopdf.tgz -SL https://svn.eionet.europa.eu/repositories/Zope/trunk/wk/wkhtmltopdf-0.12.2.4.tgz
+curl -o /tmp/wkhtmltopdf.tgz -SL https://svn.eionet.europa.eu/repositories/Zope/trunk/wk/wkhtmltopdf-0.12.4.tgz
 tar -zxvf /tmp/wkhtmltopdf.tgz -C /tmp/
 mv -v /tmp/wkhtmltopdf /usr/bin/
 
