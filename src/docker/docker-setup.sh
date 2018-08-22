@@ -19,6 +19,7 @@ buildDeps="
   libssl-dev
   libxml2-dev
   libxslt-dev
+  libxslt1-dev
   libz-dev
   zlib1g-dev
 "
@@ -30,17 +31,18 @@ runDeps="
   subversion
   tex-gyre
   poppler-utils
-  libpng12-0
+  libpng16-16
   libjpeg62
+  libssl1.0-dev
   libxml2
   libxslt1.1
   libpq5
   libmemcached11
-  libmagickcore-6.q16-2-extra
+  libmagickcore-6.q16-3-extra
   lynx
   wv
   graphviz
-  ImageMagick
+  imagemagick
   ghostscript
 "
 
@@ -72,26 +74,11 @@ fi
 echo "Running: pip install pip==$PIP zc.buildout==$ZC_BUILDOUT setuptools==$SETUPTOOLS"
 pip install pip==$PIP zc.buildout==$ZC_BUILDOUT setuptools==$SETUPTOOLS
 
-
-echo "========================================================================="
-echo "Installing gosu"
-echo "========================================================================="
-
-curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture)"
-curl -o /usr/local/bin/gosu.asc -SL "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture).asc"
-export GNUPGHOME="$(mktemp -d)"
-gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4
-gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu
-rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc
-chmod +x /usr/local/bin/gosu
-gosu nobody true
-
-
 echo "========================================================================="
 echo "Installing wkhtmltopdf..."
 echo "========================================================================="
 
-curl -o /tmp/wkhtmltopdf.tgz -SL https://svn.eionet.europa.eu/repositories/Zope/trunk/wk/wkhtmltopdf-0.12.2.4.tgz
+curl -o /tmp/wkhtmltopdf.tgz -SL https://svn.eionet.europa.eu/repositories/Zope/trunk/wk/wkhtmltopdf-0.12.4.tgz
 tar -zxvf /tmp/wkhtmltopdf.tgz -C /tmp/
 mv -v /tmp/wkhtmltopdf /usr/bin/
 
