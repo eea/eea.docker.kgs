@@ -29,6 +29,7 @@ runDeps="
   ghostscript
   git
   graphviz
+  gsfonts
   imagemagick
   libjpeg62
   libmagickcore-6.q16-3-extra
