@@ -2,19 +2,19 @@
 set -e
 
 buildDeps="
-  git
-  curl
   build-essential
-  libblas-dev
-  liblapack-dev
+  curl
   gfortran
-  libexpat1-dev
+  git
+  libblas-dev
   libc6-dev
+  libexpat1-dev
   libjpeg-dev
+  liblapack-dev
+  libldap2-dev
   libmemcached-dev
   libpq-dev
   libreadline-dev
-  libldap2-dev
   libsasl2-dev
   libssl-dev
   libxml2-dev
@@ -25,25 +25,25 @@ buildDeps="
 "
 
 runDeps="
-  vim
-  git
   curl
-  subversion
-  tex-gyre
-  poppler-utils
-  libpng16-16
+  ghostscript
+  git
+  graphviz
+  imagemagick
   libjpeg62
+  libmagickcore-6.q16-3-extra
+  libmemcached11
+  libpng16-16
+  libpq5
   libssl1.0-dev
   libxml2
   libxslt1.1
-  libpq5
-  libmemcached11
-  libmagickcore-6.q16-3-extra
   lynx
+  poppler-utils
+  subversion
+  tex-gyre
+  vim
   wv
-  graphviz
-  imagemagick
-  ghostscript
 "
 
 echo "========================================================================="
