@@ -36,6 +36,7 @@ runDeps="
   libmemcached11
   libpng16-16
   libpq5
+  librsvg2-bin
   libssl1.0-dev
   libxml2
   libxslt1.1
