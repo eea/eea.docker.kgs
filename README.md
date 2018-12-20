@@ -1,6 +1,7 @@
 # EEA Plone KGS w/ EEA Add-ons ready to run Docker image
 
 [![Build Status](https://ci.eionet.europa.eu/buildStatus/icon?job=eea/eea.docker.kgs/master)](https://ci.eionet.europa.eu/job/eea/job/eea.docker.kgs/job/master/display/redirect)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Feea%2Feea.docker.kgs.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Feea%2Feea.docker.kgs?ref=badge_shield)
 
 Docker image for Plone with EEA Common Add-ons available (formerly known as [EEA Common Plone Buildout (KGS)](https://github.com/eea/eea.plonebuildout.core)
 
@@ -192,6 +193,9 @@ you can redistribute it and/or modify it under the terms of the GNU
 General Public License as published by the Free Software Foundation;
 either version 2 of the License, or (at your option) any later
 version.
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Feea%2Feea.docker.kgs.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Feea%2Feea.docker.kgs?ref=badge_large)
 
 ## Funding
 
