@@ -43,6 +43,14 @@ if [ -z "$1" ]; then
   exec cat
 fi
 
+# Coverage
+if [ "$1" == "coverage" ]; then
+    ./bin/coverage run bin/test --test-path /plone/instance/src/$GIT_NAME -v -vv -s $GIT_NAME
+    ./bin/report xml --include=*$GIT_NAME*
+    exit 0
+fi
+
+# Tests
 if [ "$1" == "tests" ]; then
  for i in $(ls src); do
 
