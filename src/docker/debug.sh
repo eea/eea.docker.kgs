@@ -46,7 +46,7 @@ fi
 # Coverage
 if [ "$1" == "coverage" ]; then
     cd src/$GIT_NAME
-    ../../bin/coverage run ../../bin/test --test-path $(pwd) -v -vv -s $GIT_NAME
+    ../../bin/coverage run ../../bin/xmltestreport --test-path $(pwd) -v -vv -s $GIT_NAME
     ../../bin/report xml --include=*$GIT_NAME*
     exit 0
 fi
