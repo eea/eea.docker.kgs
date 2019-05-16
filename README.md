@@ -143,10 +143,10 @@ and then run
 * `RELSTORAGE_USER` Custom PostgreSQL user, `zope` by default (e.g.: `RELSTORAGE_USER=plone`)
 * `RELSTORAGE_PASS` Custom PostgreSQL password, `zope` by default (e.g.: `RELSTORAGE_PASS=secret`)
 * `RELSTORAGE_KEEP_HISTORY` history-preserving database schema, `true` by default (e.g.: `RELSTORAGE_KEEP_HISTORY=false`)
-* `SERVER_NAME` Usually the application URL without scheme (e.g.: `SERVER_NAME=staging.eea.europa.eu`)
-* `ENVIRONMENT`, `SENTRY_ENVIRONMENT` Override environment. Leave empty to automatically get it from `rancher-metadata`
-* `EEA_APP_VERSION` Your custom KGS application version (e.g: `EEA_APP_VERSION=18.5.9-2.26`)
 * `SENTRY_DSN` Send python tracebacks to sentry.eea.europa.eu (e.g.: `SENTRY_DSN=https://<public_key>:<secret_key>@sentry.eea.europa.eu`)
+* `SENTRY_SITE` ,`SERVER_NAME` Usually the application URL without scheme (e.g.: `SERVER_NAME=staging.eea.europa.eu`)
+* `SENTRY_RELEASE` Your custom KGS application version (e.g: `SENTRY_RELEASE=18.5.9-2.26`)
+* `SENTRY_ENVIRONMENT`, `ENVIRONMENT` Override environment. Leave empty to automatically get it from `rancher-metadata`
 
 
 
