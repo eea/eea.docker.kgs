@@ -1,6 +1,8 @@
 # EEA Plone KGS w/ EEA Add-ons ready to run Docker image
 
 [![Build Status](https://ci.eionet.europa.eu/buildStatus/icon?job=eea/eea.docker.kgs/master)](https://ci.eionet.europa.eu/job/eea/job/eea.docker.kgs/job/master/display/redirect)
+[![Pipeline Status](https://ci.eionet.europa.eu/buildStatus/icon?job=eea/eea.docker.www/master&subject=pipeline)](https://ci.eionet.europa.eu/job/eea/job/eea.docker.www/job/master/display/redirect)
+[![Release](https://img.shields.io/github/release/eea/eea.docker.kgs)](https://github.com/eea/eea.docker.kgs/releases)
 
 Docker image for Plone with EEA Common Add-ons available (formerly known as [EEA Common Plone Buildout (KGS)](https://github.com/eea/eea.plonebuildout.core)
 
