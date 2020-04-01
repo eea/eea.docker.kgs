@@ -23,7 +23,7 @@ pipeline {
             } finally {
               sh "docker rm -v ${BUILD_TAG}"
               sh "docker rmi ${BUILD_TAG}"
-              sh "if [ $( docker images -q ${BUILD_TAG}-devel | wc -l ) -gt 0 ]; then docker rmi ${BUILD_TAG}-devel; fi"         
+              sh "if [ `docker images -q ${BUILD_TAG}-devel | wc -l` -gt 0 ]; then docker rmi ${BUILD_TAG}-devel; fi"         
             }
           }
         }
