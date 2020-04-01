@@ -22,8 +22,8 @@ pipeline {
               sh "docker run -i --name=${BUILD_TAG} -e EXCLUDE=${EXCLUDE} -e GIT_BRANCH=${params.TARGET_BRANCH} ${BUILD_TAG}-devel /debug.sh tests"
             } finally {
               sh "docker rm -v ${BUILD_TAG}"
-              sh "docker rmi ${BUILD_TAG}-devel"
               sh "docker rmi ${BUILD_TAG}"
+              sh "if [ $( docker images -q ${BUILD_TAG}-devel | wc -l ) -gt 0 ]; then docker rmi ${BUILD_TAG}-devel; fi"         
             }
           }
         }
