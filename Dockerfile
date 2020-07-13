@@ -1,4 +1,4 @@
-FROM plone:4.3.17
+FROM plone:4.3.19
 
 ENV EDW_LOGGER_PUBLISHER=false \
     EDW_LOGGER_USER_ID=true \
