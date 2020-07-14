@@ -73,8 +73,8 @@ if [ -z "$SETUPTOOLS" ]; then
   SETUPTOOLS=$(cat $VERSION_CFG | grep "setuptools\s*\=\s*" | sed 's/ *//g' | sed 's/=//g' | sed 's/[a-z]//g')
 fi
 
-echo "Running: pip install pip==$PIP zc.buildout==$ZC_BUILDOUT setuptools==$SETUPTOOLS"
-pip install pip==$PIP zc.buildout==$ZC_BUILDOUT setuptools==$SETUPTOOLS
+echo "Running: pip install pip==$PIP zc.buildout==$ZC_BUILDOUT setuptools==$SETUPTOOLS wheel==$WHEEL"
+pip install pip==$PIP zc.buildout==$ZC_BUILDOUT setuptools==$SETUPTOOLS wheel==$WHEEL
 
 echo "========================================================================="
 echo "Installing wkhtmltopdf..."
