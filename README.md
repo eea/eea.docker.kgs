@@ -135,20 +135,40 @@ and then run
 
 ## Supported environment variables
 
+**ZOPE:**
+
 * `ZOPE_MODE` Can be `zeoserver`, `standalone`, `zeo_client`, `zeo_async`,  `rel_client`, `rel_async`. Default `standalone`
 * `ZOPE_THREADS` Configure zserver-threads. Default `2` (e.g.: `ZOPE_THREADS=4`)
 * `ZOPE_FAST_LISTEN` Set to `off` to defer opening of the HTTP socket until the end of the Zope startup phase. Defaults to `off` (e.g.: `ZOPE_FAST_LISTEN=on`)
 * `ZOPE_FORCE_CONNECTION_CLOSE` Set to `on` to enforce Zope to set `Connection: close header`. Default `on` (e.g.: `ZOPE_FORCE_CONNECTION_CLOSE=off`)
-* `GRAYLOG` Configure zope inside container to send logs to GrayLog. Default `logcentral.eea.europa.eu:12201`. (e.g.: `GRAYLOG=logs.example.com:12201`)
-* `GRAYLOG_FACILITY` Custom GrayLog facility. Default `eea.docker.kgs` (e.g.: `GRAYLOG_FACILITY=staging.example.com`)
+
+**RELSTORAGE:**
+
 * `RELSTORAGE_HOST` Custom PostgreSQL address, `postgres` by default (e.g.: `RELSTORAGE_HOST=1.2.3.4`)
 * `RELSTORAGE_USER` Custom PostgreSQL user, `zope` by default (e.g.: `RELSTORAGE_USER=plone`)
 * `RELSTORAGE_PASS` Custom PostgreSQL password, `zope` by default (e.g.: `RELSTORAGE_PASS=secret`)
 * `RELSTORAGE_KEEP_HISTORY` history-preserving database schema, `true` by default (e.g.: `RELSTORAGE_KEEP_HISTORY=false`)
+
+**GRAYLOG:**
+
+* `GRAYLOG` Configure zope inside container to send logs to GrayLog. Default `logcentral.eea.europa.eu:12201`. (e.g.: `GRAYLOG=logs.example.com:12201`)
+* `GRAYLOG_FACILITY` Custom GrayLog facility. Default `eea.docker.kgs` (e.g.: `GRAYLOG_FACILITY=staging.example.com`)
+
+**SENTRY:**
+
 * `SENTRY_DSN` Send python tracebacks to sentry.eea.europa.eu (e.g.: `SENTRY_DSN=https://<public_key>:<secret_key>@sentry.eea.europa.eu`)
 * `SENTRY_SITE` ,`SERVER_NAME` Usually the application URL without scheme (e.g.: `SERVER_NAME=staging.eea.europa.eu`)
 * `SENTRY_RELEASE` Your custom KGS application version (e.g: `SENTRY_RELEASE=18.5.9-2.26`)
 * `SENTRY_ENVIRONMENT`, `ENVIRONMENT` Override environment. Leave empty to automatically get it from `rancher-metadata`
+
+**CORS:**
+
+* `CORS_ALLOW_ORIGIN` - Origins that are allowed access to the resource. Either a comma separated list of origins, for example `http://example.net,http://mydomain.com` or `*`. Defaults to `http://localhost:3000,http://127.0.0.1:3000`
+* `CORS_ALLOW_METHODS` - A comma separated list of HTTP method names that are allowed by this CORS policy, for example `DELETE,GET,OPTIONS,PATCH,POST,PUT`. Defaults to `DELETE,GET,OPTIONS,PATCH,POST,PUT`
+* `CORS_ALLOW_CREDENTIALS` - Indicates whether the resource supports user credentials in the request. Defaults to `true`
+* `CORS_EXPOSE_HEADERS` - A comma separated list of response headers clients can access, for example `Content-Length`. Defaults to `Content-Length,X-My-Header`
+* `CORS_ALLOW_HEADERS` - A comma separated list of request headers allowed to be sent by the client, for example `X-My-Header`. Defaults to `Accept,Authorization,Content-Type`
+* `CORS_MAX_AGE` - Indicates how long the results of a preflight request can be cached. Defaults to `3600`
 
 
 

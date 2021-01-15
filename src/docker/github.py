@@ -176,25 +176,25 @@ class Github(object):
                          count, (end - start).seconds)
 
     def start(self):
-       """ Start syncing
-       """
-       self.repos = []
-       with contextlib.closing(urllib2.urlopen(self.sources, timeout=self.timeout)) as conn:
-           for line in conn:
-               if '=' not in line:
-                   continue
-               repo_name, _url = line.split('=', 1)
-               repo_name = repo_name.strip()
-               self.repos.append({
-                   'full_name': "eea/{name}".format(name=repo_name),
-                   'url': 'https://api.github.com/repos/eea/{name}'.format(name=repo_name),
+        """ Start syncing
+        """
+        self.repos = []
+        with contextlib.closing(urllib2.urlopen(self.sources, timeout=self.timeout)) as conn:
+            for line in conn:
+                if '=' not in line:
+                    continue
+                repo_name, _url = line.split('=', 1)
+                repo_name = repo_name.strip()
+                self.repos.append({
+                    'full_name': "eea/{name}".format(name=repo_name),
+                    'url': 'https://api.github.com/repos/eea/{name}'.format(name=repo_name),
                 })
-       self.check_repos()
+        self.check_repos()
 
     __call__ = start
 
 if __name__ == "__main__":
-    LOG = len(sys.argv) > 1 and sys.argv[1] or 'info'
+    LOG = sys.argv[1] if len(sys.argv) > 1 else 'info'
     if LOG.lower() not in ('fatal', 'critical', 'error',
                            'warn', 'warning', 'info', 'debug'):
         print Github.__doc__
@@ -211,9 +211,9 @@ if __name__ == "__main__":
     else:
         LOGLEVEL = logging.DEBUG
 
-    PATH = len(sys.argv) > 2 and sys.argv[2] or '.'
+    PATH = sys.argv[2] if len(sys.argv) > 2 else '.'
 
-    EXCLUDE = len(sys.argv) > 3 and sys.argv[3:] or []
+    EXCLUDE = sys.argv[3:] if len(sys.argv) > 3 else []
 
     daemon = Github(loglevel=LOGLEVEL, logpath=PATH, exclude=EXCLUDE)
     daemon.start()

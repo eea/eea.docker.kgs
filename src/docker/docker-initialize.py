@@ -1,4 +1,5 @@
 #!/plone/instance/bin/python
+""" Docker initialize """
 
 import os
 from contextlib import closing
@@ -34,6 +35,7 @@ class Environment(object):
 
         self.mode = mode
         self.zope_conf = conf
+        self.cors_conf = '/plone/instance/parts/%s/etc/package-includes/999-cors.zcml' % (mode,)
 
         self.graylog = self.env.get('GRAYLOG', '')
         self.facility = self.env.get('GRAYLOG_FACILITY', self.mode)
@@ -108,14 +110,6 @@ class Environment(object):
 
         self.log("Sending errors to sentry. Environment: %s", self.environment)
 
-        # TODO Cleanup as Sentry integration was moved to eea.sentry
-        # if 'raven.contrib.zope' in self.conf:
-        #     return
-
-        # template = SENTRY_TEMPLATE % (self.name, self.version, self.environment)
-        # self.conf = "%import raven.contrib.zope\n" + self.conf.replace('</logfile>', '</logfile>%s' % template)
-
-
     def zope_log(self):
         """ Zope logging
         """
@@ -183,13 +177,41 @@ class Environment(object):
         self.conf = self.conf.replace('keep-history true', 'keep-history false')
 
     def finish(self):
+        """ Finish Setup
+        """
         conf = self.conf
         with open(self.zope_conf, 'w') as zfile:
             zfile.write(conf)
 
+    def cors(self):
+        """ Configure CORS Policies
+        """
+        if not [e for e in self.env if e.startswith("CORS_")]:
+            return
+
+        allow_origin = self.env.get("CORS_ALLOW_ORIGIN",
+            "http://localhost:3000,http://127.0.0.1:3000")
+        allow_methods = self.env.get("CORS_ALLOW_METHODS",
+            "DELETE,GET,OPTIONS,PATCH,POST,PUT")
+        allow_credentials = self.env.get("CORS_ALLOW_CREDENTIALS", "true")
+        expose_headers = self.env.get("CORS_EXPOSE_HEADERS", "Content-Length")
+        allow_headers = self.env.get("CORS_ALLOW_HEADERS", "Accept,Authorization,Content-Type")
+        max_age = self.env.get("CORS_MAX_AGE", "3600")
+        cors_conf = CORS_TEMPLATE.format(
+            allow_origin=allow_origin,
+            allow_methods=allow_methods,
+            allow_credentials=allow_credentials,
+            expose_headers=expose_headers,
+            allow_headers=allow_headers,
+            max_age=max_age
+        )
+        with open(self.cors_conf, "w") as cfile:
+            cfile.write(cors_conf)
+
     def setup(self):
         """ Configure
         """
+        self.cors()
         self.zope_mode()
         self.zope_log()
         self.zope_threads()
@@ -203,6 +225,22 @@ class Environment(object):
 
     __call__ = setup
 
+CORS_TEMPLATE = """<configure
+  xmlns="http://namespaces.zope.org/zope">
+  <configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone">
+    <plone:CORSPolicy
+      allow_origin="{allow_origin}"
+      allow_methods="{allow_methods}"
+      allow_credentials="{allow_credentials}"
+      expose_headers="{expose_headers}"
+      allow_headers="{allow_headers}"
+      max_age="{max_age}"
+     />
+  </configure>
+</configure>
+"""
 
 GRAYLOG_TEMPLATE = """
   <graylog>

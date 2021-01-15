@@ -1,11 +1,13 @@
 #!/plone/instance/bin/zopepy
 # -*- coding: ascii -*-
+""" Release candidates """
 
 import sys
 import mmap
 from os import listdir
 
 def main(argv):
+    """ Main """
     print '*** Release candidates list ***'
     print '==============================='
 
@@ -19,7 +21,7 @@ def main(argv):
             continue
         cand_s = mmap.mmap(cand_f.fileno(), 0, access=mmap.ACCESS_READ)
 
-        for k in range(5):
+        for _k in range(5):
             cand_s.readline()
         if cand_s.readline() != '\n':
             found = True
