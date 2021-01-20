@@ -35,7 +35,7 @@ class Environment(object):
 
         self.mode = mode
         self.zope_conf = conf
-        self.cors_conf = '/plone/instance/parts/%s/etc/package-includes/999-cors.zcml' % (mode,)
+        self.cors_conf = '/plone/instance/parts/%s/etc/package-includes/999-cors-overrides.zcml' % (mode,)
 
         self.graylog = self.env.get('GRAYLOG', '')
         self.facility = self.env.get('GRAYLOG_FACILITY', self.mode)
