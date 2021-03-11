@@ -15,4 +15,5 @@ RUN mv /docker-entrypoint.sh /plone-entrypoint.sh \
 
 COPY src/docker/* /
 COPY src/plone/* /plone/instance/
+COPY packages/* /packages/
 RUN /docker-setup.sh

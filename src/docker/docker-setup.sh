@@ -80,7 +80,7 @@ echo "========================================================================="
 echo "Installing wkhtmltopdf..."
 echo "========================================================================="
 
-curl -o /tmp/wkhtmltopdf.tgz -SL https://svn.eionet.europa.eu/repositories/Zope/trunk/wk/wkhtmltopdf-0.12.4.tgz
+cp /packages/wkhtmltopdf-0.12.4.tgz /tmp/wkhtmltopdf.tgz 
 tar -zxvf /tmp/wkhtmltopdf.tgz -C /tmp/
 mv -v /tmp/wkhtmltopdf /usr/bin/
 
