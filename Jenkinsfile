@@ -21,9 +21,9 @@ pipeline {
               sh "docker build -t ${BUILD_TAG}-devel devel"
               sh "docker run -i --name=${BUILD_TAG} -e EXCLUDE=${EXCLUDE} -e GIT_BRANCH=${params.TARGET_BRANCH} ${BUILD_TAG}-devel /debug.sh tests"
             } finally {
-              sh "echo $(docker rm -v ${BUILD_TAG})"
-              sh "echo $(docker rmi ${BUILD_TAG})"
-              sh "echo $(docker rmi ${BUILD_TAG}-devel)"         
+              sh '''echo $(docker rm -v ${BUILD_TAG})'''
+              sh '''echo $(docker rmi ${BUILD_TAG})'''
+              sh '''echo $(docker rmi ${BUILD_TAG}-devel)'''     
             }
           }
         }
