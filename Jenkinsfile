@@ -11,19 +11,22 @@ pipeline {
 
   stages {
     stage('Build & Test') {
+      environment {
+        IMAGE_NAME = BUILD_TAG.toLowerCase()
+      }
       steps {
         node(label: 'clair') {
           script {
             try {
               checkout scm
-              sh '''sed -i "s|eeacms/kgs|${BUILD_TAG}|g" devel/Dockerfile'''
-              sh "docker build -t ${BUILD_TAG} ."
-              sh "docker build -t ${BUILD_TAG}-devel devel"
-              sh "docker run -i --name=${BUILD_TAG} -e EXCLUDE=${EXCLUDE} -e GIT_BRANCH=${params.TARGET_BRANCH} ${BUILD_TAG}-devel /debug.sh tests"
+              sh '''sed -i "s|eeacms/kgs|${IMAGE_NAME}|g" devel/Dockerfile'''
+              sh "docker build -t ${IMAGE_NAME} ."
+              sh "docker build -t ${IMAGE_NAME}-devel devel"
+              sh "docker run -i --name=${IMAGE_NAME} -e EXCLUDE=${EXCLUDE} -e GIT_BRANCH=${params.TARGET_BRANCH} ${IMAGE_NAME}-devel /debug.sh tests"
             } finally {
-              sh '''echo $(docker rm -v ${BUILD_TAG})'''
-              sh '''echo $(docker rmi ${BUILD_TAG})'''
-              sh '''echo $(docker rmi ${BUILD_TAG}-devel)'''     
+              sh script: "docker rm -v ${IMAGE_NAME}", returnStatus: true
+              sh script: "docker rmi ${IMAGE_NAME}", returnStatus: true
+              sh script: "docker rmi ${IMAGE_NAME}-devel", returnStatus: true     
             }
           }
         }
@@ -38,22 +41,16 @@ pipeline {
     }
     changed {
       script {
-        def url = "${env.BUILD_URL}/display/redirect"
-        def status = currentBuild.currentResult
-        def subject = "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
-        def summary = "${subject} (${url})"
-        def details = """<h1>${env.JOB_NAME} - Build #${env.BUILD_NUMBER} - ${status}</h1>
-                         <p>Check console output at <a href="${url}">${env.JOB_BASE_NAME} - #${env.BUILD_NUMBER}</a></p>
+        def details = """<h1>${env.JOB_NAME} - Build #${env.BUILD_NUMBER} - ${currentBuild.currentResult}</h1>
+                         <p>Check console output at <a href="${env.BUILD_URL}/display/redirect">${env.JOB_BASE_NAME} - #${env.BUILD_NUMBER}</a></p>
                       """
-
-        def color = '#FFFF00'
-        if (status == 'SUCCESS') {
-          color = '#00FF00'
-        } else if (status == 'FAILURE') {
-          color = '#FF0000'
-        }
-        slackSend (color: color, message: summary)
-        emailext (subject: '$DEFAULT_SUBJECT', to: '$DEFAULT_RECIPIENTS', body: details)
+        emailext(
+        subject: '$DEFAULT_SUBJECT',
+        body: details,
+        attachLog: true,
+        compressLog: true,
+        recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'CulpritsRecipientProvider']]
+        )
       }
     }
   }
