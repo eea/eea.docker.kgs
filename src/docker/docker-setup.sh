@@ -1,52 +1,9 @@
 #!/bin/bash
 set -e
 
-buildDeps="
-  build-essential
-  curl
-  gfortran
-  git
-  libblas-dev
-  libc6-dev
-  libexpat1-dev
-  libjpeg-dev
-  liblapack-dev
-  libldap2-dev
-  libmemcached-dev
-  libpq-dev
-  libreadline-dev
-  libsasl2-dev
-  libssl-dev
-  libxml2-dev
-  libxslt-dev
-  libxslt1-dev
-  libz-dev
-  zlib1g-dev
-"
+buildDeps="$(cat "/build-deps.txt")"
 
-runDeps="
-  curl
-  ghostscript
-  git
-  graphviz
-  gsfonts
-  imagemagick
-  libjpeg62
-  libmagickcore-6.q16-3-extra
-  libmemcached11
-  libpng16-16
-  libpq5
-  librsvg2-bin
-  libssl1.0-dev
-  libxml2
-  libxslt1.1
-  lynx
-  poppler-utils
-  subversion
-  tex-gyre
-  vim
-  wv
-"
+runDeps="$(cat "/run-deps.txt")"
 
 echo "========================================================================="
 echo "Installing $buildDeps"
