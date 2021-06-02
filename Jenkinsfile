@@ -15,7 +15,7 @@ pipeline {
         IMAGE_NAME = BUILD_TAG.toLowerCase()
       }
       steps {
-        node(label: 'clair') {
+        node(label: 'docker') {
           script {
             try {
               checkout scm
