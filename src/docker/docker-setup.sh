@@ -54,7 +54,7 @@ echo "========================================================================="
 echo "Installing wkhtmltopdf..."
 echo "========================================================================="
 
-cp /packages/wkhtmltopdf-0.12.4.tgz /tmp/wkhtmltopdf.tgz 
+cp /packages/wkhtmltopdf-0.12.6.tgz /tmp/wkhtmltopdf.tgz 
 tar -zxvf /tmp/wkhtmltopdf.tgz -C /tmp/
 mv -v /tmp/wkhtmltopdf /usr/bin/
 
