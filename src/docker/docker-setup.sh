@@ -33,6 +33,23 @@ fi
 echo "Running: pip install pip==$PIP zc.buildout==$ZC_BUILDOUT setuptools==$SETUPTOOLS wheel==$WHEEL"
 pip install pip==$PIP zc.buildout==$ZC_BUILDOUT setuptools==$SETUPTOOLS wheel==$WHEEL
 
+
+echo "========================================================================="
+echo "Upgrading openssl to 1.1.1..."
+echo "========================================================================="
+
+curl -o openssl-1.1.1.tar.gz https://www.openssl.org/source/openssl-1.1.1.tar.gz
+echo "7079eb017429e0ffb9efb42bf80ccb21 openssl-1.1.1.tar.gz" | md5sum -c -
+tar -xzvf openssl-1.1.1.tar.gz
+cd openssl-1.1.1
+./config -Wl,-rpath,'$(LIBRPATH)'
+make
+make install
+cp /usr/local/bin/openssl /usr/bin/
+cd ..
+rm -rf openssl-1.1.1*
+
+
 echo "========================================================================="
 echo "Installing wkhtmltopdf..."
 echo "========================================================================="
