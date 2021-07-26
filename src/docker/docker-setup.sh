@@ -49,6 +49,14 @@ cp /usr/local/bin/openssl /usr/bin/
 cd ..
 rm -rf openssl-1.1.1*
 
+echo "========================================================================="
+echo "Installing certifi and adding symbolic link to the certificate"
+echo "========================================================================="
+
+pip install certifi
+rm -rf /usr/local/ssl/cert.pem
+ln -s /usr/local/lib/python2.7/site-packages/certifi/cacert.pem /usr/local/ssl/cert.pem
+
 
 echo "========================================================================="
 echo "Installing wkhtmltopdf..."
