@@ -195,7 +195,7 @@ class Environment(object):
             "DELETE,GET,OPTIONS,PATCH,POST,PUT")
         allow_credentials = self.env.get("CORS_ALLOW_CREDENTIALS", "true")
         expose_headers = self.env.get("CORS_EXPOSE_HEADERS", "Content-Length")
-        allow_headers = self.env.get("CORS_ALLOW_HEADERS", "Accept,Authorization,Content-Type")
+        allow_headers = self.env.get("CORS_ALLOW_HEADERS", "Accept,Authorization,Content-Type,Lock-Token")
         max_age = self.env.get("CORS_MAX_AGE", "3600")
         cors_conf = CORS_TEMPLATE.format(
             allow_origin=allow_origin,
