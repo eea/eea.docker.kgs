@@ -33,6 +33,9 @@ fi
 echo "Running: pip install pip==$PIP zc.buildout==$ZC_BUILDOUT setuptools==$SETUPTOOLS wheel==$WHEEL"
 pip install pip==$PIP zc.buildout==$ZC_BUILDOUT setuptools==$SETUPTOOLS wheel==$WHEEL
 
+echo "Running: pip install typing==3.10.0.0"
+pip install typing==3.10.0.0
+
 echo "========================================================================="
 echo "Upgrading openssl to 1.1.1..."
 echo "========================================================================="
