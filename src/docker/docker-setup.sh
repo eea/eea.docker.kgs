@@ -36,9 +36,6 @@ pip install pip==$PIP zc.buildout==$ZC_BUILDOUT setuptools==$SETUPTOOLS wheel==$
 echo "Running: pip install typing==3.10.0.0"
 pip install typing==3.10.0.0
 
-echo "Running: pip install PasteScript==1.7.5"
-pip install PasteScript==1.7.5
-
 echo "========================================================================="
 echo "Upgrading openssl to 1.1.1..."
 echo "========================================================================="
