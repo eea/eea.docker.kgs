@@ -11,7 +11,11 @@ LABEL eea-kgs-version=$EEA_KGS_VERSION \
 
 RUN mv /docker-entrypoint.sh /plone-entrypoint.sh \
  && mv -v versions.cfg plone-versions.cfg \
- && ls -a | grep .cfg | grep -v zope | grep -v plone | xargs rm
+ && ls -a | grep .cfg | grep -v zope | grep -v plone | xargs rm \
+ #Update stretch repositories
+ && sed -i s/deb.debian.org/archive.debian.org/g /etc/apt/sources.list \
+ && sed -i 's|security.debian.org|archive.debian.org/|g' /etc/apt/sources.list \
+ && sed -i '/stretch-updates/d' /etc/apt/sources.list
 
 COPY src/docker/* /
 COPY src/plone/* /plone/instance/
